@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FuzeWorkflowModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FuzeWorkflow.dbo.FuzeWorkActivity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FuzeWorkActivity">
+          <Key>
+            <PropertyRef Name="ActivityID" />
+          </Key>
+          <Property Name="ActivityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FuzeWorkflow.dbo.FuzeWorkflow' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="FuzeWorkflow">
+          <Key>
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="WorkflowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkFlow" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="FuzeWorkflowInstance">
+          <Key>
+            <PropertyRef Name="WorkflowInstanceID" />
+          </Key>
+          <Property Name="WorkflowInstanceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkFlow" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="FuzeWorkflowModelStoreContainer">
+          <EntitySet Name="FuzeWorkflowInstance" EntityType="Self.FuzeWorkflowInstance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FuzeWorkActivity" EntityType="Self.FuzeWorkActivity" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FuzeWorkActivity].[ActivityID] AS [ActivityID]
+    FROM [dbo].[FuzeWorkActivity] AS [FuzeWorkActivity]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="FuzeWorkflow" EntityType="Self.FuzeWorkflow" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [FuzeWorkflow].[WorkflowID] AS [WorkflowID], 
+    [FuzeWorkflow].[WorkFlow] AS [WorkFlow]
+    FROM [dbo].[FuzeWorkflow] AS [FuzeWorkflow]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FuzeWorkflowModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FuzeWorkflowEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FuzeWorkflowInstances" EntityType="FuzeWorkflowModel.FuzeWorkflowInstance" />
+          <EntitySet Name="FuzeWorkActivities" EntityType="FuzeWorkflowModel.FuzeWorkActivity" />
+          <EntitySet Name="FuzeWorkflows" EntityType="FuzeWorkflowModel.FuzeWorkflow" />
+        </EntityContainer>
+        <EntityType Name="FuzeWorkflowInstance">
+          <Key>
+            <PropertyRef Name="WorkflowInstanceID" />
+          </Key>
+          <Property Name="WorkflowInstanceID" Type="Guid" Nullable="false" />
+          <Property Name="WorkFlow" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FuzeWorkActivity">
+          <Key>
+            <PropertyRef Name="ActivityID" />
+          </Key>
+          <Property Name="ActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="FuzeWorkflow">
+          <Key>
+            <PropertyRef Name="WorkflowID" />
+          </Key>
+          <Property Name="WorkflowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkFlow" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FuzeWorkflowModelStoreContainer" CdmEntityContainer="FuzeWorkflowEntities">
+          <EntitySetMapping Name="FuzeWorkflowInstances">
+            <EntityTypeMapping TypeName="FuzeWorkflowModel.FuzeWorkflowInstance">
+              <MappingFragment StoreEntitySet="FuzeWorkflowInstance">
+                <ScalarProperty Name="WorkFlow" ColumnName="WorkFlow" />
+                <ScalarProperty Name="WorkflowInstanceID" ColumnName="WorkflowInstanceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuzeWorkActivities">
+            <EntityTypeMapping TypeName="FuzeWorkflowModel.FuzeWorkActivity">
+              <MappingFragment StoreEntitySet="FuzeWorkActivity">
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FuzeWorkflows">
+            <EntityTypeMapping TypeName="FuzeWorkflowModel.FuzeWorkflow">
+              <MappingFragment StoreEntitySet="FuzeWorkflow">
+                <ScalarProperty Name="WorkFlow" ColumnName="WorkFlow" />
+                <ScalarProperty Name="WorkflowID" ColumnName="WorkflowID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

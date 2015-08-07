@@ -1,0 +1,89 @@
+﻿<dom-module id="fz-formcontainer">
+    <template>
+        <div id="container"></div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'fz-formcontainer',
+            properties: {
+                innerhtml: {
+                    type: String,
+                    notify: true,
+                    observer: '_innerhtmlChanged',
+                },
+
+                model: {
+                    type: Object,
+                    notify: true,
+                    value: {},
+                    observer: '_modelChanged'
+                },
+
+                validation: {
+                    type: Array,
+                    value: function () {
+                        return [];
+                    },
+                    observer: '_validationChanged',
+                }
+            },
+
+            observers: ['_validationChanged(validation.*)'],
+
+            _innerhtmlChanged: function () {
+                var domBind = document.createElement('template', 'dom-bind');
+                domBind.id = "formtemplate";
+                domBind.Model = this.model;
+
+                var doc = domBind.content.ownerDocument;
+                var elem = doc.createElement('div');
+                elem.innerHTML = this.innerhtml;
+                domBind.content.appendChild(elem);
+                this.$.container.appendChild(domBind);
+            },
+
+            _modelChanged: function () {
+                var domBind = document.querySelector('#formtemplate');
+                if (domBind !== undefined && domBind !== null) {
+                    domBind.Model = this.model;
+                    //$.each(this.model, function (key, value) {
+                    //    //domBind.setAttribute(key, value);
+                    //    Object.defineProperty(domBind, key, { value: value, configurable: true, });
+                    //    console.log(key);
+                    //});
+                }
+            },
+
+            _validationChanged: function (msgs) {
+                var domBind = document.querySelector('#formtemplate');
+                if (domBind !== undefined && domBind !== null) {
+                    domBind.Validation = [];
+                    domBind.Validation = this.validation;
+                }
+            },
+
+            validationItem: function (index) {
+                return validation[index]
+            },
+
+            addValidationMessage: function (msg) {
+                this.push('validation', msg);
+            },
+
+            /*
+            ,
+
+            ready: function () {
+                var domBind = document.createElement('template', 'dom-bind');
+                domBind.greeting = 'Hello World';
+                var doc = domBind.content.ownerDocument;
+                var elem = doc.createElement('div');
+                elem.innerHTML = '<b>{{greeting}}</b>';
+                domBind.content.appendChild(elem);
+                this.$.container.appendChild(domBind);
+            }
+            */
+        });
+    </script>
+</dom-module>

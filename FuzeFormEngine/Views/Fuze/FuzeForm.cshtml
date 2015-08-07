@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FuzeForm</title>
+
+</head>
+<body>
+    <div>
+
+        <template is="dom-bind" id="app">
+            <script type="text/javascript">
+                (function(document) {
+                    'use strict';
+                    var app = document.querySelector('#app');
+
+                    app.Model = @Html.Raw(Json.Encode(@Model.InputModel));
+
+                    app.addEventListener('dom-change', function() {
+                    });
+
+                    window.addEventListener('WebComponentsReady', function() {
+                        //createElement(FzTextbox);
+                    });
+                })(document);
+            </script>
+            <div>
+                <fz-textbox name="fname" placeholder="First name..." bindvalue="{{Model.FirstName}}" regex="^[1-9]\d{0,2}$" classname="abce"></fz-textbox>
+                First Name : <span>{{Model.FirstName}}</span>
+                <br />
+
+                Age : <span>{{Model.Age}}</span>
+            </div>
+            <fz-textbox name="age" bindvalue="{{Model.Age}}" placeholder="Age.."></fz-textbox>
+
+        </template>
+    </div>
+</body>
+</html>

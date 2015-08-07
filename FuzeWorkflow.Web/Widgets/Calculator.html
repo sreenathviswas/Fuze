@@ -1,0 +1,114 @@
+﻿<!--<table>
+    <tr>
+        <td>Input 1</td>
+        <td><fz-textbox name='inputA' bindvalue='{{Model.Input1}}' placeholder='Input 1' required validationmessage="Input number 1 is required"></fz-textbox></td>
+
+    </tr>
+    <tr>
+        <td>Input 2</td>
+        <td>
+            <fz-textbox name='inputB' bindvalue='{{Model.Input2}}' placeholder='Input 2' k></fz-textbox>
+        </td>
+    </tr>
+    <tr>
+        <td>Result</td>
+        <td>
+            <fz-textbox name='Result' bindvalue='{{Model.Result}}'></fz-textbox>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="submit" name="ADD" value="ADD" />
+            &nbsp;
+            <input type="submit" name="SUBTRACT" value="SUBTRACT" />
+        </td>
+        <td>
+            <input type="submit" name="MULTIPLY" value="MULTIPLY" />
+            &nbsp;
+            <input type="submit" name="DIVIDE" value="DIVIDE" />
+        </td>
+    </tr>
+</table>-->
+
+<fz-togglecontainer headertext="Patient Details" toggletext="Edit" submiturl="Fuze/Index">
+    <fz-viewtemplate>
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><span>{{Model.FirstName}}</span> <span>{{Model.MiddleName}}</span> <span>{{Model.LastName}}</span></td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td>11/08/1988</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>Female</td>
+            </tr>
+            <tr>
+                <td>Marital Status</td>
+                <td>Single</td>
+            </tr>
+            <tr>
+                <td>SSN</td>
+                <td>123-45-6789</td>
+            </tr>
+            <tr>
+                <td>Driver's Licence</td>
+                <td>F255-921-50-904-0</td>
+            </tr>
+        </table>
+    </fz-viewtemplate>
+    <fz-edittemplate>        
+       <fz-validationsummary validationmessages="{{Validation}}"></fz-validationsummary>
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>
+                    <fz-textbox name='FirstName' bindvalue='{{Model.FirstName}}' required validationmessage="First Name is required"></fz-textbox>
+                </td>
+            </tr>
+            <tr>
+                <td>Middle Name</td>
+                <td><fz-textbox name='MiddleName' bindvalue='{{Model.MiddleName}}'  required validationmessage="Middle Name is required"></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><fz-textbox name='LastName' bindvalue='{{Model.LastName}}'  required validationmessage="Last Name is required"></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td><fz-textbox name='DateOfBirth' bindvalue='{{Model.DateOfBirth}}'></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><fz-textbox name='Gender' bindvalue='{{Model.Gender}}'></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>Marital Status</td>
+                <td><fz-textbox name='MaritalStatus' bindvalue='{{Model.MaritalStatus}}'></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>SSN</td>
+                <td><fz-textbox name='SSN' bindvalue='{{Model.SSN}}'></fz-textbox></td>
+            </tr>
+            <tr>
+                <td>Driver's Licence</td>
+                <td><fz-textbox name='DriversLicence' bindvalue='{{Model.DriversLicence}}'></fz-textbox></td>
+            </tr>
+            <!--<tr>
+                <td>
+                    <input type="button" name="cancel" value="CANCEL" />
+                    &nbsp;
+                    <input type="button" name="cancel" value="SAVE" onclick="clickHandler(event)"/>
+                </td>
+            </tr>-->
+        </table>
+    </fz-edittemplate>
+</fz-togglecontainer>
+
+
+<!--<fz-repeater>
+    First Name : <span>{{item.first}}</span>
+    Last Name  : <span>{{item.last}}</span>
+</fz-repeater>-->

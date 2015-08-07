@@ -1,0 +1,21 @@
+﻿<dom-module id="fz-validationsummary">
+    <template>
+        <ul>
+            <template is="dom-repeat" items="{{validationmessages}}">
+                <li>{{item}}</li>
+            </template>
+        </ul>
+    </template>
+    <script>
+        var FzValidationSummary = Polymer({
+            is: 'fz-validationsummary',
+
+            properties: {
+                validationmessages: {
+                    type: Array,
+                    notify: true,
+                },
+            },
+        });
+    </script>
+</dom-module>

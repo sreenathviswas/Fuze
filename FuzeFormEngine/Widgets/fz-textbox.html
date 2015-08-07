@@ -1,0 +1,52 @@
+﻿<dom-module id="fz-textbox">
+    <template>
+        <input type="text" class$="{{classname}}" placeholder="{{placeholder}}" value="{{bindvalue::input}}" />
+    </template>
+    <script>
+        var FzTextbox = Polymer({
+            is: 'fz-textbox',
+
+            properties: {
+                bindvalue: {
+                    type: String,
+                    notify: true
+                    //observer: '_bindValueChanged',
+                },
+
+                className: {
+                    type: String
+                },
+
+                placeholder: {
+                    type: String
+                },
+
+                regex: {
+                    type: String
+                }
+            },
+
+            //listeners: {
+            //    'input': '_onInput',
+            //    'keypress': '_onKeypress'
+            //},
+
+            _onInput: function () {
+                this.bindvalue = this.value;
+            },
+
+            _onKeypress: function (event) {
+
+            },
+
+            _bindValueChanged: function () {
+                if (this.value !== this.bindvalue) {
+                    this.value = !this.bindvalue ? '' : this.bindvalue;
+                }
+                this.fire('bind-value-changed', { value: this.bindValue });
+            }
+        });
+
+        //document.registerElement('fz-textbox', FzTextbox);
+    </script>
+</dom-module>

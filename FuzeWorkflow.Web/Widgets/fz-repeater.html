@@ -1,0 +1,41 @@
+﻿<dom-module name="fz-repeater">
+    <template>
+        <content id="template">
+        </content>
+        <!--<template is="dom-repeat" items="{{items}}" id="contentelement">
+            <span>{{item.first}}</span>            
+        </template>-->
+    </template>
+</dom-module>
+
+<script type="text/javascript">
+    Polymer({
+        is: "fz-repeater",
+        items: {
+            type: Array,
+            notify: true
+        },
+        ready: function () {
+            this.items = [{ first: 'Bob', last: 'Smith' }, { first: 'Sally', last: 'Johnson' }, { first: 'John', last: 'Doe' }];
+        },
+
+        attached: function () {
+            this.nodes = this.getContentChildren();
+            this.async(function () {
+                var domRepeat = document.createElement('template', 'dom-repeat');
+                var template = document.querySelector("#template");
+                domRepeat.items = this.items;
+                this.nodes.forEach(function (element, index) {
+                    var div = document.createElement('div');
+                    div.innerHTML = element.outerHTML
+                    for (var index = 0; index < div.childNodes.length; index++) {                      
+                        domRepeat.content.appendChild(div);
+                    }                    
+                });               
+                Polymer.dom(this.root).insertBefore(domRepeat, template);
+                //this.$.container.appendChild(domRepeat);
+
+            }.bind(this));
+        },
+    });
+</script>

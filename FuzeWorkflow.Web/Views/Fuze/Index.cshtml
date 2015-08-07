@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="~/Content/polymer/polymer.html">
+    <link rel="import" href="~/Widgets/Widgets.html">
+</head>
+<body>
+    <fz-formcontainer id="formcontainer">
+
+    </fz-formcontainer>
+
+    <script type="text/javascript">
+        window.addEventListener('WebComponentsReady', function () {
+            invokeWorkFlow();
+        });
+
+        function renderForm(formName) {
+            $.ajax({
+                type: "GET",
+                url: "/Fuze/GetFuzeForm",
+                async: false,
+                dataType: "json",
+                data: { "formName": formName },
+                success: function (data) {
+                    var formcontainer = document.querySelector('#formcontainer')
+                    formcontainer.innerhtml = data.Layout;
+                }
+            });
+        }
+
+        function invokeWorkFlow() {
+            $.ajax({
+                type: "GET",
+                url: "/Fuze/GetFormData",
+                async: false,
+                dataType: "json",
+                success: function (data) {
+                    bindModel(data);
+                }
+            });
+        }
+
+        function bindModel(data) {
+            var formcontainer = document.querySelector('#formcontainer')
+            formcontainer.model = data.Model;
+            formcontainer.WorkFlowID = data.WorkFlowID;
+            formcontainer.WorkflowInstanceID = data.WorkflowInstanceID;
+            renderForm(data.formName);
+        }
+
+        function modelValid(submit) {
+            var formcontainer = document.querySelector('#formcontainer');
+            formcontainer.validation = [];
+
+            var form = $(submit).closest("form");
+            var formId = form.attr('id');
+            var sumbitForm = document.querySelector('#' + formId);
+            var valid = true;
+            var fzTextboxes = sumbitForm.querySelectorAll('fz-textbox');
+            var hasValidationSummary = sumbitForm.querySelectorAll('fz-validationsummary').length > 0;
+            $.each(fzTextboxes, function (index, fzTextbox) {
+                var val = fzTextbox.validate();
+                valid = valid && val;
+                if (!val) {
+                    if (hasValidationSummary) {
+                        fzTextbox.showinline = false;
+                    }
+                    formcontainer.addValidationMessage(fzTextbox.validationmessage);
+                }
+            });
+            return valid;
+        }
+
+        $("#formcontainer").on('click', 'input[type="submit"]', function (event) {
+            event.preventDefault();
+            if (modelValid(this)) {
+
+                var formcontainer = document.querySelector('#formcontainer');
+                var url = "?workflowID=" + formcontainer.WorkFlowID +
+                    "&workflowInstanceID=" + formcontainer.WorkflowInstanceID;
+
+                formcontainer.model.OUTCOME = $(this).attr('name');
+
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    accept: 'application/json',
+                    data: JSON.stringify(formcontainer.model),
+                    success: function (data) {
+                        bindModel(data);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

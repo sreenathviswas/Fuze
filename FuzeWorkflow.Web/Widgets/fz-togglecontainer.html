@@ -1,0 +1,103 @@
+﻿<dom-module id="fz-togglecontainer">
+    <style>
+        .cf-title {
+            font-size: 1.12em !important;
+            line-height: 1.4em;
+            color: #101216;
+            margin: 0;
+            margin-bottom: 3px !important;
+            padding: 0;
+        }
+
+        .cf-edit-link {
+            font-size: .95em;
+            font-weight: normal;
+            display: inline-block;
+            margin-right: 8px;
+            margin-left: 8px;
+            height: 24px !important;
+        }
+    </style>
+    <template>
+        <h2 class="cf-title">[[headertext]]<a class="cf-edit-link" on-tap="toggleView" hidden$="[[viewmode]]">[[toggletext]]</a></h2>
+        <template is="dom-if" if="[[viewmode]]" restamp="true">
+            <content id="view" select="fz-viewtemplate">
+            </content>
+        </template>
+        <template is="dom-if" if="[[!viewmode]]" restamp="true">
+            <form is="iron-form" id="form" method="post" action="[[submiturl]]">
+                <content id="edit" select="fz-edittemplate">
+                </content>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" name="cancel" value="CANCEL" on-tap="toggleView" />
+                            &nbsp;
+                            <input type="submit" name="save" value="SAVE" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </template>
+    </template>
+    <script>
+        var FzTogglecontainer = Polymer({
+            is: 'fz-togglecontainer',
+
+            properties: {
+                viewmode: {
+                    type: Boolean,
+                    notify: true,
+                    value: true
+                },
+
+                headertext: {
+                    type: String,
+                    notify: true
+                },
+
+                toggletext: {
+                    type: String,
+                    notify: true
+                },
+
+                submiturl: {
+                    type: String,
+                },
+            },
+
+            toggleView: function () {
+                this.viewmode = !this.viewmode;
+            },
+
+            clickHandler: function (event) {
+                var form = document.querySelector('#form')
+                form.submit();
+            }
+        });
+
+    </script>
+</dom-module>
+
+
+<dom-module id="fz-viewtemplate">
+    <template>
+        <content></content>
+    </template>
+    <script>
+        var FzViewTemplate = Polymer({
+            is: 'fz-viewtemplate',
+        });
+    </script>
+</dom-module>
+
+<dom-module id="fz-edittemplate">
+    <template>
+        <content></content>
+    </template>
+    <script>
+        var FzEditTemplate = Polymer({
+            is: 'fz-edittemplate',
+        });
+    </script>
+</dom-module>

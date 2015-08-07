@@ -1,0 +1,111 @@
+﻿<dom-module id="fz-textbox">
+    <style>
+        .invalid {
+            border: 1px solid ridge;
+        }
+    </style>
+    <template>
+        <input type="text" name$="{{name}}" class$="{{classname}}" required="{{required}}" placeholder="{{placeholder}}" value="{{bindvalue::input}}" />
+        <template is="dom-if" if="{{required}}">
+            <span style="color:red;">*</span>
+        </template>
+        <template is="dom-if" if="{{showvalidationmessage}}">
+            <span style="color:red;">{{validationmessage}}</span>
+        </template>
+    </template>
+    <script>
+        var FzTextbox = Polymer({
+            is: 'fz-textbox',
+
+            properties: {
+                bindvalue: {
+                    type: String,
+                    notify: true
+                    //observer: '_bindValueChanged',
+                },
+
+                name: {
+                    type: String,
+                },
+
+                className: {
+                    type: String
+                },
+
+                placeholder: {
+                    type: String
+                },
+
+                regex: {
+                    type: String
+                },
+
+                required: {
+                    type: Boolean
+                },
+
+                validationmessage: {
+                    type: String,
+                    value: 'This filed is required',
+                },
+
+                invalid: {
+                    type: Boolean,
+                    value: false,
+                    notify: true,
+                    observer: '_invalidValueChanged'
+                },
+
+                showinline: {
+                    type: Boolean,
+                    value: true,
+                    notify: true,
+                    observer: '_showinlineValueChanged'
+                },
+
+                showvalidationmessage: {
+                    type: Boolean,
+                    value: false,
+                    notify: true
+                }
+            },          
+
+            _onInput: function () {
+                this.bindvalue = this.value;
+            },
+
+            _onKeypress: function (event) {
+
+            },
+
+            _bindValueChanged: function () {
+                if (this.value !== this.bindvalue) {
+                    this.value = !this.bindvalue ? '' : this.bindvalue;
+                }
+                this.fire('bind-value-changed', { value: this.bindValue });
+            },
+
+            _invalidValueChanged: function () {
+                this.showvalidationmessage = this.invalid && this.showinline;
+            },
+
+            _showinlineValueChanged: function () {
+                this.showvalidationmessage = this.invalid && this.showinline;
+            },
+
+            validate: function () {
+                if (this.required && (this.bindvalue === null || typeof this.bindvalue === 'undefined' || this.bindvalue.length == 0)) {
+                    this.invalid = true;
+                    return false;
+                }
+                this.validationmessage = '';
+                this.invalid = false;
+                this.classname = 'invalid';
+                return true;
+            },
+
+
+
+        });
+    </script>
+</dom-module>

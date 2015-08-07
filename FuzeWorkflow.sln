@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzeWorkflow", "FuzeWorkflow\FuzeWorkflow.csproj", "{70989ACE-9953-4002-BD78-3B86A84A9C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzeWorkflow.Data", "entityFramework\FuzeWorkflow.Data.csproj", "{45D1A24C-288E-4868-8650-51CF33E1DFFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzeWorkflow.Contracts", "FuzeWorkflow.Contracts\FuzeWorkflow.Contracts.csproj", "{E9500EBC-DC89-4311-820E-E64F08FE80BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamalGeneratorConsole", "XamalGeneratorConsole\XamalGeneratorConsole.csproj", "{DDCEC980-783D-45C3-AE6A-419BA1D61457}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzeWorkflow.Web", "FuzeWorkflow.Web\FuzeWorkflow.Web.csproj", "{22699F21-1DD6-4D0F-9325-2D16FC42C152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzeFormEngine", "FuzeFormEngine\FuzeFormEngine.csproj", "{92B64A6B-1E91-4BFD-8A4C-DF861E8865F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70989ACE-9953-4002-BD78-3B86A84A9C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70989ACE-9953-4002-BD78-3B86A84A9C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70989ACE-9953-4002-BD78-3B86A84A9C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70989ACE-9953-4002-BD78-3B86A84A9C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D1A24C-288E-4868-8650-51CF33E1DFFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D1A24C-288E-4868-8650-51CF33E1DFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D1A24C-288E-4868-8650-51CF33E1DFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D1A24C-288E-4868-8650-51CF33E1DFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9500EBC-DC89-4311-820E-E64F08FE80BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9500EBC-DC89-4311-820E-E64F08FE80BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9500EBC-DC89-4311-820E-E64F08FE80BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9500EBC-DC89-4311-820E-E64F08FE80BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDCEC980-783D-45C3-AE6A-419BA1D61457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCEC980-783D-45C3-AE6A-419BA1D61457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCEC980-783D-45C3-AE6A-419BA1D61457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCEC980-783D-45C3-AE6A-419BA1D61457}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22699F21-1DD6-4D0F-9325-2D16FC42C152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22699F21-1DD6-4D0F-9325-2D16FC42C152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22699F21-1DD6-4D0F-9325-2D16FC42C152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22699F21-1DD6-4D0F-9325-2D16FC42C152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B64A6B-1E91-4BFD-8A4C-DF861E8865F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B64A6B-1E91-4BFD-8A4C-DF861E8865F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B64A6B-1E91-4BFD-8A4C-DF861E8865F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B64A6B-1E91-4BFD-8A4C-DF861E8865F0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
